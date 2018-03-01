@@ -62,7 +62,8 @@ password = getpass("Enter password for '{}': ".format(username))
 
 for f in fn:
     ret = client.delete(name=f, username=username, password=password)
-    if ret.get('status'):
+
+    if ret.get('result'):
         print("Delete {f}".format(f))
     else:
         print("Delete {} failed.".format(f))
