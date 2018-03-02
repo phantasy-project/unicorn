@@ -60,10 +60,15 @@ if not fn:
 username = r_input("Enter username: ")
 password = getpass("Enter password for '{}': ".format(username))
 
+cnt = 0
 for f in fn:
     ret = client.delete(name=f, username=username, password=password)
 
-    if ret.get('result'):
-        print("Delete {f}".format(f))
+    if ret.get('status'):
+        cnt += 1
+        print("Deleted {}.".format(f))
     else:
-        print("Delete {} failed.".format(f))
+        print("Failed to delete {}.".format(f))
+
+print("-"*30)
+print("Deleted {} functions.".format(cnt))
