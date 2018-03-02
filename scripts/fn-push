@@ -50,11 +50,11 @@ password = getpass("Enter password for '{}': ".format(username))
 
 for f in data.functions:
     r = client.create(username=username, password=password, **f)
-    if r.get('status'):
+    if r.get('status') is False:
+        print("Failed to create function: {}.".format(f.get('name')))
+    else:
         cnt += 1
         print("Created new function: {}.".format(f.get('name')))
-    else:
-        print("Failed to create function: {}.".format(f.get('name')))
 
 print("-"*30)
 print("Created {} functions.".format(cnt))

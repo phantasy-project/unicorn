@@ -64,11 +64,11 @@ cnt = 0
 for f in fn:
     ret = client.delete(name=f, username=username, password=password)
 
-    if ret.get('status'):
+    if ret.get('status') is False:
+        print("Failed to delete {}.".format(f))
+    else:
         cnt += 1
         print("Deleted {}.".format(f))
-    else:
-        print("Failed to delete {}.".format(f))
 
 print("-"*30)
 print("Deleted {} functions.".format(cnt))

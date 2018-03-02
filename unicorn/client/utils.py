@@ -14,6 +14,6 @@ class MyAdapter(HTTPAdapter):
 
 def make_response(r):
     if r.ok:
-        return {'status': r.ok, 'code': r.status_code, 'text': r.json()}
+        return r.json()
     else:
         return {'status': r.ok, 'code': r.status_code, 'text': r.text}
