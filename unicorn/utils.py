@@ -19,7 +19,7 @@ def pickle_obj(obj, coding='base64'):
 
 class UnicornData(object):
     """Parsing data from external xlsx file.
-   
+
     Examples
     --------
     >>> f = 'data.xlsx'
@@ -39,7 +39,7 @@ class UnicornData(object):
         self.ncols, self.nrows = self.sheet.ncols, self.sheet.nrows
         self.header = [x.value for x in self.sheet.row(0)]
         self.functions = self.generate_functions()
-        
+
     def generate_functions(self):
         for ridx in range(1, self.nrows):
             row = [v.value for v in self.sheet.row(ridx)]
@@ -53,6 +53,21 @@ class UnicornData(object):
                     np.array([float(v) for v in y_raw.split()]))
             f = dict(zip(self.header, row))
             yield f
-            
-        
-        
+
+
+def get_func(fstr):
+    """Return function object from code.
+    """
+    fncode, ns = compile(fstr, "<string>", "exec"), {}
+    exec(fncode, ns)
+    return ns.get('f')
+    
+
+def to_dict(d):
+    ret = {}
+    for k,v in d.items():
+        try:
+            ret[k] = float(v)
+        except:
+            ret[k] = v
+    return ret
