@@ -7,8 +7,8 @@ import numpy as np
 import sys
 
 
-DATA_X_COL_IDX = 4
-DATA_Y_COL_IDX = 5
+DATA_X_COL_IDX = 7
+DATA_Y_COL_IDX = 8
 
 
 def pickle_obj(obj, coding='base64'):
