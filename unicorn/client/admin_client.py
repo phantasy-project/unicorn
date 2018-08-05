@@ -16,7 +16,8 @@ except NameError:
     r_input = input
 
 DEFAULT_BASE_URL = "https://127.0.0.1:5000"
-FUNC_KEYS = ('name', 'invoked', 'timestamp', 'author',
+FUNC_KEYS = ('name', 'ename', 'from_field', 'to_field',
+             'invoked', 'timestamp', 'author',
              'code', 'description', 'args', 'data_x', 'data_y')
 
 
