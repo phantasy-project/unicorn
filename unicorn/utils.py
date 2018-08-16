@@ -29,12 +29,14 @@ class UnicornData(object):
     >>> # client is an AdminClient instance
     >>>
     """
-    def __init__(self, xlsx_file):
+    def __init__(self, xlsx_file, **kws):
         try:
             book = xlrd.open_workbook(xlsx_file)
         except:
             print("Open xlsx file failed.")
             sys.exit(1)
+        self.data_x_col_idx = kws.get('data_x_col_idx', DATA_X_COL_IDX)
+        self.data_y_col_idx = kws.get('data_y_col_idx', DATA_Y_COL_IDX)
         self.sheet = book.sheet_by_index(0)
         self.ncols, self.nrows = self.sheet.ncols, self.sheet.nrows
         self.header = [x.value for x in self.sheet.row(0)]
@@ -44,12 +46,12 @@ class UnicornData(object):
         for ridx in range(1, self.nrows):
             row = [v.value for v in self.sheet.row(ridx)]
 
-            x_raw = row[DATA_X_COL_IDX]
-            row[DATA_X_COL_IDX] = pickle_obj(
+            x_raw = row[self.data_x_col_idx]
+            row[self.data_x_col_idx] = pickle_obj(
                     np.array([float(v) for v in x_raw.split()]))
 
-            y_raw = row[DATA_Y_COL_IDX]
-            row[DATA_Y_COL_IDX] = pickle_obj(
+            y_raw = row[self.data_y_col_idx]
+            row[self.data_y_col_idx] = pickle_obj(
                     np.array([float(v) for v in y_raw.split()]))
             f = dict(zip(self.header, row))
             yield f
