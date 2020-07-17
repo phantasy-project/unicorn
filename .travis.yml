@@ -8,4 +8,10 @@ python:
   - "3.8"
 install:
   - pip install -r requirements.txt
-
+script:
+  - pip wheel . -w wheelhouse
+  - ls wheelhouse
+after_success:
+  - |
+    ls wheelhouse
+      
