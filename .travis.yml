@@ -16,7 +16,7 @@ jobs:
       workspaces:
         use:
           - whl
-      script: pip install python-unicorn -f wheelhouse && python -c "import unicorn"
+      script: pip install wheelhouse/*.whl && python -c "import unicorn"
     - stage: deploy
       workspaces:
         use:
