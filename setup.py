@@ -7,7 +7,7 @@ app_scripts = [i for i in glob.glob("scripts/*")]
 
 setup(
         name='python-unicorn',
-        version='0.3.1',
+        version='0.3.2',
         description='Python client interface to Unicorn service.',
         author='Tong Zhang',
         author_email='zhangt@frib.msu.edu',
@@ -20,7 +20,9 @@ setup(
         scripts=app_scripts,
         classifiers=[
             'Programming Language :: Python :: 2.7',
-            'Programming Language :: Python :: 3.4',
+            'Programming Language :: Python :: 3',
             'Topic :: Software Development :: Libraries :: Python Modules',
-            'Topic :: Scientific/Engineering :: Physics'],
+            'Topic :: Scientific/Engineering :: Physics'
+        ],
+        install_requires=['requests'],
 )
