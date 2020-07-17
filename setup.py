@@ -24,5 +24,5 @@ setup(
             'Topic :: Software Development :: Libraries :: Python Modules',
             'Topic :: Scientific/Engineering :: Physics'
         ],
-        install_requires=['requests'],
+        install_requires=['requests', 'xlrd', 'numpy'],
 )
