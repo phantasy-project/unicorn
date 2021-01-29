@@ -6,9 +6,10 @@ from xlwt import XFStyle
 UNIT_MAP_DEFAULT = {
     "I": "A",
     "V": "V",
-    "ANG": "T.m",
+    "TM": "T.m",
     "B": "T",
-    "G": "T/m",
+    "B2": "T/m",
+    "B3": "T/m^2",
 }
 
 def make_fn_name(ename, phy_field, eng_field, flag_p2e):
@@ -28,6 +29,11 @@ def make_fn_name(ename, phy_field, eng_field, flag_p2e):
 
 def make_fn_desc(phy_field, eng_field, flag_p2e, **kws):
     """Make function description, e.g. 'I(A) to B(T)'
+
+    Keyword Arguments
+    -----------------
+    unit_map : dict
+        A dict of unit mapping, ENG unit to PHY unit.
     """
     f_phy, f_eng = phy_field.upper(), eng_field.upper()
     unit_map = kws.get('unit_map', UNIT_MAP_DEFAULT)
@@ -50,12 +56,12 @@ def flip_data_str_signs(data):
 
 
 def make_row(ename, phy_field, eng_field, flag_p2e,
-             code, params, xdata, ydata, desc=None,
-             color='white'):
+             code, params, xdata, ydata, **kws):
     """Make row for xlwt.
     """
     name, f_field, t_field = make_fn_name(ename, phy_field, eng_field, flag_p2e)
-    desc = make_fn_desc(phy_field, eng_field, flag_p2e) if desc is None else desc
+    desc = make_fn_desc(phy_field, eng_field, flag_p2e) if kws.get('desc', None) is None else kws.get('desc')
+    color = kws.get('color', 'white')
 
     return (name, ename, f_field, t_field, desc, params, code, xdata, ydata), color
 
