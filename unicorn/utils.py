@@ -5,10 +5,12 @@ import codecs
 import xlrd
 import numpy as np
 import sys
-
+from collections import namedtuple
 
 DATA_X_COL_IDX = 7
 DATA_Y_COL_IDX = 8
+UniFunc = namedtuple('UniFunc',
+    'name ename from_field to_field description args code data_x data_y')
 
 
 def pickle_obj(obj, coding='base64'):
@@ -54,7 +56,15 @@ class UnicornData(object):
             row[self.data_y_col_idx] = pickle_obj(
                     np.array([float(v) for v in y_raw.split()]))
             f = dict(zip(self.header, row))
-            yield f
+            yield to_tuple(f)
+
+
+def to_tuple(f):
+    """Convert dict *f* to namedTuple.
+    """
+    attr = {k: v for k, v in f.items()}
+    attr['code'] = get_func(attr['code'])
+    return UniFunc(**attr)
 
 
 def get_func(fstr):
@@ -63,7 +73,7 @@ def get_func(fstr):
     fncode, ns = compile(fstr, "<string>", "exec"), {}
     exec(fncode, ns)
     return ns.get('f')
-    
+
 
 def to_dict(d):
     ret = {}
