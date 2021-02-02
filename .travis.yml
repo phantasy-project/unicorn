@@ -1,0 +1,30 @@
+os: linux
+dist: xenial
+language: python
+
+jobs:
+  include:
+    - stage: build
+      workspaces:
+        create:
+          name: whl
+          paths:
+            - wheelhouse/*.whl
+      install: pip install -r requirements.txt
+      script: python setup.py bdist_wheel -d wheelhouse
+    - stage: test
+      workspaces:
+        use:
+          - whl
+      script: pip install wheelhouse/*.whl && python -c "import unicorn"
+    - stage: deploy
+      workspaces:
+        use:
+          - whl
+      env: TWINE_USERNAME=__token__
+      script:
+      - |
+        if [[ $TRAVIS_TAG ]]; then
+          python -m pip install twine
+          python -m twine upload --verbose wheelhouse/python_unicorn*.whl
+        fi
