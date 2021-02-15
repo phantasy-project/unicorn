@@ -6,7 +6,7 @@ __authors__ = "Tong Zhang"
 __copyright__ = "(c) 2018-2021, Facility for Rare Isotope beams," \
                 " Michigan State University"
 __contact__ = "Tong Zhang <zhangt@frib.msu.edu>"
-__version__ = "0.4.0"
+__version__ = "0.4.1"
 
 __doc__ = \
 """Python client to communicate with UNICORN web service.
