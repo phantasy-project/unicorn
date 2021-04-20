@@ -15,6 +15,10 @@ C1_ydata = C4_ydata
 C2_xdata = C4_xdata
 C2_ydata = C4_ydata
 
+# C3 !!!need data!!! use C4 temporarily
+C3_xdata = C4_xdata
+C3_ydata = C4_ydata
+
 # C4S4
 C4S4_xdata = C4_xdata
 C4S4_ydata = "1.61E-04 3.23E-04 4.86E-04 6.48E-04 8.10E-04 9.73E-04 1.14E-03 1.30E-03 1.46E-03 1.62E-03 1.79E-03 1.95E-03"
@@ -34,6 +38,10 @@ C_S2_ydata = C9Q10_ydata
 # H3 !!!need data!!! use C9Q10 temporarily
 H3_xdata = C9Q10_xdata
 H3_ydata = C9Q10_ydata
+
+# H1 !!!need data!!! use H3 temporarily
+H1_xdata = H3_xdata
+H1_ydata = H3_ydata
 
 # S4
 S4_xdata = "20 40 60 80 100 120 140 160 180 200 220 240 260 280 300"
@@ -73,6 +81,14 @@ Q2_ydata_ = flip_data_str_signs(Q2_ydata)
 # Q3 !!!need data!!! use Q8 temporarily
 Q3_xdata = Q8_xdata
 Q3_ydata = Q8_ydata
+
+# Q4 !!!need data!!! use Q8 temporarily
+Q4_xdata = Q8_xdata
+Q4_ydata = Q8_ydata
+
+# Q5 !!!need data!!! use Q8 temporarily
+Q5_xdata = Q8_xdata
+Q5_ydata = Q8_ydata
 
 # Q6 !!!need data!!! use Q8 temporarily
 Q6_xdata = Q8_xdata

@@ -70,12 +70,14 @@ def write_row(sheet, row_content, row=0, col0=0, style=None):
     """Write row into 'sheet' with 'row_content' at 'row'-th row from 'col0'.
     """
     style = XFStyle() if style is None else style
-    sheet.col(0).width = 300*20
-    sheet.col(1).width = 200*20
-    sheet.col(2).width = 320*20
-    sheet.col(3).width = 256*20
+    sheet.col(0).width = 400 * 20
+    sheet.col(1).width = 300 * 20
+    sheet.col(2).width = 150 * 20
+    sheet.col(3).width = 150 * 20
+    sheet.col(4).width = 200 * 20
+    sheet.col(5).width = 100 * 20
+    sheet.col(6).width = 300 * 20
     for col, label in enumerate(row_content, col0):
         sheet.row(row).height_mismatch = True
-        sheet.row(row).height = 24*20
+        sheet.row(row).height = 24 * 20
         sheet.write(row, col, label, style)
-

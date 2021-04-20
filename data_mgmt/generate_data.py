@@ -6,6 +6,7 @@ from fn_utils import write_row
 
 from fn_data import C1_xdata, C1_ydata
 from fn_data import C2_xdata, C2_ydata
+from fn_data import C3_xdata, C3_ydata
 from fn_data import C4_xdata, C4_ydata
 from fn_data import C4S4_xdata, C4S4_ydata
 from fn_data import C9Q10_xdata, C9Q10_ydata
@@ -17,12 +18,15 @@ from fn_data import S2_xdata, S2_ydata
 from fn_data import S4_xdata, S4_ydata
 
 from fn_data import H3_xdata, H3_ydata
+from fn_data import H1_xdata, H1_ydata
 
 from fn_data import Q1_xdata, Q1_ydata
 from fn_data import Q1_xdata_, Q1_ydata_
 from fn_data import Q2_xdata, Q2_ydata
 from fn_data import Q2_xdata_, Q2_ydata_
 from fn_data import Q3_xdata, Q3_ydata
+from fn_data import Q4_xdata, Q4_ydata
+from fn_data import Q5_xdata, Q5_ydata
 from fn_data import Q6_xdata, Q6_ydata
 from fn_data import Q6_xdata_, Q6_ydata_
 from fn_data import Q8_xdata, Q8_ydata
@@ -31,15 +35,20 @@ from fn_data import Q9_xdata, Q9_ydata
 from fn_templates import fn_prop, fn_prop_reversed
 from fn_templates import fn_quad, fn_quad_reversed, fn_quad_
 
-from fn_egroups import C1_elements, C2_elements, C4_elements, C4S4_elements, \
+from fn_egroups import C1_elements, C2_elements, C3_elements, \
+                       C4_elements, C4S4_elements, \
                        C_S1_elements, C_S2_elements, C9Q10_elements
 
-from fn_egroups import Q1_elements, Q1_elements_, Q2_elements, Q2_elements_, Q3_elements, \
-                       Q6_elements, Q6_elements_, Q8_elements, Q9_elements
+from fn_egroups import Q1_elements, Q1_elements_, \
+                       Q2_elements, Q2_elements_, \
+                       Q3_elements, \
+                       Q4_elements, Q5_elements, \
+                       Q6_elements, Q6_elements_, \
+                       Q8_elements, Q9_elements
 
 from fn_egroups import S1_elements, S2_elements, S4_elements
 
-from fn_egroups import H3_elements
+from fn_egroups import H1_elements, H3_elements
 
 
 def make_rows_COR_SOL(ename, k, xdata, ydata,
@@ -99,8 +108,8 @@ def make_rows_QUAD(ename, xdata, ydata,
 all_rows = []
 COLOR_COR = "light_yellow"
 COLOR_SOL = "light_turquoise"
-COLOR_QUAD = "light_orange"
-COLOR_SEXT = 'teal'
+COLOR_QUAD = "light_green"
+COLOR_SEXT = "light_blue"
 
 ###
 
@@ -113,6 +122,11 @@ k_C2_ = -1.970e-4
 for e in C2_elements:
     all_rows.extend(make_rows_COR_SOL(e, k=k_C2, xdata=C2_xdata, ydata=C2_ydata, color=COLOR_COR,
                                       k_=k_C2_))
+
+# new, to check
+k_C3 = 3.484e-4
+for e in C3_elements:
+    all_rows.extend(make_rows_COR_SOL(e, k=k_C3, xdata=C3_xdata, ydata=C3_ydata, color=COLOR_COR))
 
 k_C4 = 3.484e-4
 for e in C4_elements:
@@ -194,6 +208,22 @@ for e in Q3_elements:
         e, k=k_Q3, xdata=Q3_xdata, ydata=Q3_ydata,
         phy_field="B2", eng_field="I", dtype='QUAD', color=COLOR_QUAD))
 
+# Q4
+# new, to check
+k_Q4 = -0.10373
+for e in Q4_elements:
+    all_rows.extend(make_rows_COR_SOL(
+        e, k=k_Q4, xdata=Q4_xdata, ydata=Q4_ydata,
+        phy_field="B2", eng_field="I", dtype='QUAD', color=COLOR_QUAD))
+
+# Q5
+# new, to check
+k_Q5 = -0.10373
+for e in Q5_elements:
+    all_rows.extend(make_rows_COR_SOL(
+        e, k=k_Q5, xdata=Q5_xdata, ydata=Q5_ydata,
+        phy_field="B2", eng_field="I", dtype='QUAD', color=COLOR_QUAD))
+
 # Q6
 k_Q6 = 0.05018
 for e in Q6_elements:
@@ -238,8 +268,17 @@ for e in H3_elements:
         e, k=k_H3, xdata=H3_xdata, ydata=H3_ydata,
         phy_field="B3", eng_field="I", dtype='SEXT', color=COLOR_SEXT))
 
+# H1
+# new, to check
+k_H1 = -5.48
+for e in H1_elements:
+    all_rows.extend(make_rows_COR_SOL(
+        e, k=k_H1, xdata=H1_xdata, ydata=H1_ydata,
+        phy_field="B3", eng_field="I", dtype='SEXT', color=COLOR_SEXT))
+
 ##############################################################################
-# write to xlsx
+# write to xls
+output_filename = 'unicorn-data-new-1.xls'
 
 from xlwt import Workbook
 from xlwt import XFStyle, easyxf, Pattern, Style
@@ -253,7 +292,7 @@ sheet1 = book.add_sheet('Functions')
 header = ('name', 'ename', 'from_field', 'to_field', 'description', 'args', 'code', 'data_x', 'data_y')
 
 # write header
-header_style = easyxf('font: name Arial, bold True, color red, height 240; borders: bottom thin;')
+header_style = easyxf('font: name Arial, bold True, color blue, height 240; borders: bottom thin;')
 
 write_row(sheet1, header, 0, style=header_style)
 
@@ -267,4 +306,4 @@ for idx, r in enumerate(all_rows, 1):
     write_row(sheet1, row_content, idx, style=style)
 
 # save as a file
-book.save('unicorn-data-new-1.xlsx')
+book.save(output_filename)
