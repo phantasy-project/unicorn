@@ -505,18 +505,18 @@ Q1_elements_ = (
 Q2_elements = (
 'FS1_BTS:Q_D2421',
 'FS2_BTS:Q_D4000',
-'BDS_BTS:Q_D5609',
 )
 
 # (-) Q2
 # [i.name for i in lat if i.phy_type == 'QUAD_Q2' and i.get_field('B2').polarity == -1]
 Q2_elements_ = (
 'FS1_BTS:Q_D2453',
+'BDS_BTS:Q_D5609',
 )
 
-# Q3
-# [i.name for i in lat if i.phy_type == 'QUAD_Q3']
-Q3_elements = (
+# (-) Q3
+# [i.name for i in lat if i.phy_type == 'QUAD_Q3'and i.get_field('B2').polarity == -1]
+Q3_elements_ = (
 'FS2_BTS:Q_D3994',
 )
 
@@ -534,22 +534,29 @@ Q6_elements_ = (
 )
 
 # H3
-# [i.name for i in lat if i.phy_type == 'H3']
-H3_elements = (
+# [i.name for i in lat if i.phy_type == 'H3' and i.get_field('B3').polarity == -1]
+H3_elements_ = (
 'FS1_BBS:S_D2419',
 'FS1_BBS:S_D2469',
 )
 
-# H1 (new)
-# [i.name for i in lat if i.phy_type == 'H1']
+# H1
+# [i.name for i in lat if i.phy_type == 'H1' and i.get_field('B3').polarity == 1]
 H1_elements = (
-'FS2_BBS:S_D4000',
 'FS2_BBS:S_D4007',
 'FS2_BBS:S_D4098',
-'FS2_BBS:S_D4106',
 )
 
-# C3 (new)
+# (-) H1
+# [i.name for i in lat if i.phy_type == 'H1' and i.get_field('B3').polarity == -1]
+H1_elements_ = (
+'FS2_BBS:S_D4000',
+'FS2_BBS:S_D4106',
+'BDS_BBS:S_D5606',
+'BDS_BBS:S_D5703',
+)
+
+# C3
 # [i.name for i in lat if i.phy_type == 'C3']
 C3_elements = (
  'FS2_BBS:DCV_D4010',
@@ -564,7 +571,7 @@ C3_elements = (
  'BDS_BTS:DCH_D5496',
 )
 
-# Q4 (new)
+# Q4
 # [i.name for i in lat if i.phy_type == 'QUAD_Q4']
 Q4_elements = (
  'FS2_BBS:QH_D3996',
@@ -573,9 +580,9 @@ Q4_elements = (
  'FS2_BBS:QH_D4109',
 )
 
-# Q5 (new)
-# [i.name for i in lat if i.phy_type == 'QUAD_Q5']
-Q5_elements = (
+# (-) Q5
+# [i.name for i in lat if i.phy_type == 'QUAD_Q5' and i.get_field('B2').polarity == -1]
+Q5_elements_ = (
 'FS2_BBS:QV_D4004',
 'FS2_BBS:QV_D4102',
 )

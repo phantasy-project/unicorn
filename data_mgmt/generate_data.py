@@ -41,14 +41,15 @@ from fn_egroups import C1_elements, C2_elements, C3_elements, \
 
 from fn_egroups import Q1_elements, Q1_elements_, \
                        Q2_elements, Q2_elements_, \
-                       Q3_elements, \
-                       Q4_elements, Q5_elements, \
+                       Q3_elements_, \
+                       Q4_elements, \
+                       Q5_elements_, \
                        Q6_elements, Q6_elements_, \
                        Q8_elements, Q9_elements
 
 from fn_egroups import S1_elements, S2_elements, S4_elements
 
-from fn_egroups import H1_elements, H3_elements
+from fn_egroups import H1_elements, H1_elements_, H3_elements_
 
 
 def make_rows_COR_SOL(ename, k, xdata, ydata,
@@ -113,7 +114,7 @@ COLOR_SEXT = "light_blue"
 
 ###
 
-k_C1 = 4.835e-5
+k_C1 = 4.682E-05
 for e in C1_elements:
     all_rows.extend(make_rows_COR_SOL(e, k=k_C1, xdata=C1_xdata, ydata=C1_ydata, color=COLOR_COR))
 
@@ -123,8 +124,7 @@ for e in C2_elements:
     all_rows.extend(make_rows_COR_SOL(e, k=k_C2, xdata=C2_xdata, ydata=C2_ydata, color=COLOR_COR,
                                       k_=k_C2_))
 
-# new, to check
-k_C3 = 3.484e-4
+k_C3 = 8.76e-5
 for e in C3_elements:
     all_rows.extend(make_rows_COR_SOL(e, k=k_C3, xdata=C3_xdata, ydata=C3_ydata, color=COLOR_COR))
 
@@ -202,30 +202,28 @@ for e in Q2_elements_:
         phy_field="B2", eng_field="I", dtype='QUAD', color=COLOR_QUAD))
 
 # Q3
-k_Q3 = -0.10373
-for e in Q3_elements:
+k_Q3 = 0.10373
+for e in Q3_elements_:
     all_rows.extend(make_rows_COR_SOL(
-        e, k=k_Q3, xdata=Q3_xdata, ydata=Q3_ydata,
+        e, k=-k_Q3, xdata=Q3_xdata, ydata=Q3_ydata,
         phy_field="B2", eng_field="I", dtype='QUAD', color=COLOR_QUAD))
 
 # Q4
-# new, to check
-k_Q4 = -0.10373
+k_Q4 = 8.9697E-02
 for e in Q4_elements:
     all_rows.extend(make_rows_COR_SOL(
         e, k=k_Q4, xdata=Q4_xdata, ydata=Q4_ydata,
         phy_field="B2", eng_field="I", dtype='QUAD', color=COLOR_QUAD))
 
 # Q5
-# new, to check
-k_Q5 = -0.10373
-for e in Q5_elements:
+k_Q5 = 8.6750E-02
+for e in Q5_elements_:
     all_rows.extend(make_rows_COR_SOL(
-        e, k=k_Q5, xdata=Q5_xdata, ydata=Q5_ydata,
+        e, k=-k_Q5, xdata=Q5_xdata, ydata=Q5_ydata,
         phy_field="B2", eng_field="I", dtype='QUAD', color=COLOR_QUAD))
 
 # Q6
-k_Q6 = 0.05018
+k_Q6 = 0.0548
 for e in Q6_elements:
     all_rows.extend(make_rows_COR_SOL(
         e, k=k_Q6, xdata=Q6_xdata, ydata=Q6_ydata,
@@ -262,23 +260,28 @@ for e in Q9_elements:
         x1=x1, x1r=x1r, a1=a1, b1=b1, c1=c1, a2=a2, b2=b2, c2=c2, color=COLOR_QUAD))
 
 # H3
-k_H3 = -5.48
-for e in H3_elements:
+k_H3 = 5.48
+for e in H3_elements_:
     all_rows.extend(make_rows_COR_SOL(
-        e, k=k_H3, xdata=H3_xdata, ydata=H3_ydata,
+        e, k=-k_H3, xdata=H3_xdata, ydata=H3_ydata,
         phy_field="B3", eng_field="I", dtype='SEXT', color=COLOR_SEXT))
 
 # H1
-# new, to check
-k_H1 = -5.48
+k_H1 = 15
 for e in H1_elements:
     all_rows.extend(make_rows_COR_SOL(
         e, k=k_H1, xdata=H1_xdata, ydata=H1_ydata,
         phy_field="B3", eng_field="I", dtype='SEXT', color=COLOR_SEXT))
+for e in H1_elements_:
+    all_rows.extend(make_rows_COR_SOL(
+        e, k=-k_H1, xdata=H1_xdata, ydata=H1_ydata,
+        phy_field="B3", eng_field="I", dtype='SEXT', color=COLOR_SEXT))
+
+
 
 ##############################################################################
 # write to xls
-output_filename = 'unicorn-data-new-1.xls'
+output_filename = 'unicorn-data-new.xls'
 
 from xlwt import Workbook
 from xlwt import XFStyle, easyxf, Pattern, Style
