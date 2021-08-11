@@ -7,7 +7,7 @@ app_scripts = [i for i in glob.glob("scripts/*")]
 
 setup(
         name='python-unicorn',
-        version='0.4.1',
+        version='0.4.2',
         description='Python client interface to Unicorn service.',
         author='Tong Zhang',
         author_email='zhangt@frib.msu.edu',
