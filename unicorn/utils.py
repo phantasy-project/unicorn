@@ -10,7 +10,7 @@ from collections import namedtuple
 DATA_X_COL_IDX = 7
 DATA_Y_COL_IDX = 8
 UniFunc = namedtuple('UniFunc',
-    'name ename from_field to_field description args code data_x data_y')
+    'name ename from_field to_field description args code code_str data_x data_y')
 
 
 def pickle_obj(obj, coding='base64'):
@@ -63,6 +63,7 @@ def to_tuple(f):
     """Convert dict *f* to namedTuple.
     """
     attr = {k: v for k, v in f.items()}
+    attr['code_str'] = attr['code']
     attr['code'] = get_func(attr['code'])
     return UniFunc(**attr)
 
