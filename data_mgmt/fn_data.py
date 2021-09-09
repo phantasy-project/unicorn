@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from fn_utils import flip_data_str_signs
+from fn_utils import get_aris_data
 
 
 # C4
@@ -97,4 +98,13 @@ Q6_ydata = Q8_ydata
 Q6_xdata_ = Q6_xdata
 Q6_ydata_ = flip_data_str_signs(Q6_ydata)
 
-
+#ARIS
+QUAD_FSQ1_xdata, QUAD_FSQ1_ydata = get_aris_data('QUAD_FSQ1')
+QUAD_FSQ2_xdata, QUAD_FSQ2_ydata = get_aris_data('QUAD_FSQ2')
+QUAD_FSQ5_xdata, QUAD_FSQ5_ydata = get_aris_data('QUAD_FSQ5')
+BEND_FSD1_SCD1_xdata, BEND_FSD1_SCD1_ydata = get_aris_data('BEND_FSD1_SCD1')
+BEND_FSD1_SCD2_xdata, BEND_FSD1_SCD2_ydata = get_aris_data('BEND_FSD1_SCD2')
+SEXT_FSQ2_xdata, SEXT_FSQ2_ydata = get_aris_data('SEXT_FSQ2')
+SEXT_FSQ5_xdata, SEXT_FSQ5_ydata = get_aris_data('SEXT_FSQ5')
+OCT_FSQ2_xdata, OCT_FSQ2_ydata = get_aris_data('OCT_FSQ2')
+OCT_FSQ5_xdata, OCT_FSQ5_ydata = get_aris_data('OCT_FSQ5')

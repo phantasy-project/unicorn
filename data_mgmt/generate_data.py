@@ -3,6 +3,7 @@
 from fn_utils import make_fn_name, make_fn_desc
 from fn_utils import make_row, flip_data_str_signs
 from fn_utils import write_row
+from ESD.data._utils import generate_func_string
 
 from fn_data import C1_xdata, C1_ydata
 from fn_data import C2_xdata, C2_ydata
@@ -32,6 +33,16 @@ from fn_data import Q6_xdata_, Q6_ydata_
 from fn_data import Q8_xdata, Q8_ydata
 from fn_data import Q9_xdata, Q9_ydata
 
+from fn_data import QUAD_FSQ1_xdata, QUAD_FSQ1_ydata
+from fn_data import QUAD_FSQ2_xdata, QUAD_FSQ2_ydata
+from fn_data import QUAD_FSQ5_xdata, QUAD_FSQ5_ydata
+from fn_data import BEND_FSD1_SCD1_xdata, BEND_FSD1_SCD1_ydata
+from fn_data import BEND_FSD1_SCD2_xdata, BEND_FSD1_SCD2_ydata
+from fn_data import SEXT_FSQ2_xdata, SEXT_FSQ2_ydata
+from fn_data import SEXT_FSQ5_xdata, SEXT_FSQ5_ydata
+from fn_data import OCT_FSQ2_xdata, OCT_FSQ2_ydata
+from fn_data import OCT_FSQ5_xdata, OCT_FSQ5_ydata
+
 from fn_templates import fn_prop, fn_prop_reversed
 from fn_templates import fn_quad, fn_quad_reversed, fn_quad_
 
@@ -50,6 +61,11 @@ from fn_egroups import Q1_elements, Q1_elements_, \
 from fn_egroups import S1_elements, S2_elements, S4_elements
 
 from fn_egroups import H1_elements, H1_elements_, H3_elements_
+
+from fn_egroups import BEND_FSD1_SCD1_elements, BEND_FSD1_SCD2_elements
+from fn_egroups import QUAD_FSQ1_elements
+from fn_egroups import QUAD_FSQ2_elements, SEXT_FSQ2_elements, OCT_FSQ2_elements
+from fn_egroups import QUAD_FSQ5_elements, SEXT_FSQ5_elements, OCT_FSQ5_elements
 
 
 def make_rows_COR_SOL(ename, k, xdata, ydata,
@@ -104,13 +120,30 @@ def make_rows_QUAD(ename, xdata, ydata,
     return [row_e2p, row_p2e]
 
 
+# create rows with provided function string
+def make_rows_sf(ename, xdata, ydata,
+                      params="x", phy_field="B", eng_field="I",
+                      dtype="BEND", **kws):
+    x0 = [float(i) for i in xdata.split()]
+    y0 = [float(i) for i in ydata.split()]
+    code_e2p, code_p2e = generate_func_string(x0, y0)
+    row_e2p = make_row(ename, phy_field, eng_field, False,
+                       code_e2p, params, xdata, ydata, **kws)
+    row_p2e = make_row(ename, phy_field, eng_field, True,
+                       code_p2e, params, ydata, xdata, **kws)
+    return [row_e2p, row_p2e]
+
+
 ##############################################################################
 
 all_rows = []
+# xlwt.Style.colour_map
 COLOR_COR = "light_yellow"
 COLOR_SOL = "light_turquoise"
 COLOR_QUAD = "light_green"
 COLOR_SEXT = "light_blue"
+COLOR_OCT = "light_orange"
+COLOR_BEND = "yellow"
 
 ###
 
@@ -277,7 +310,60 @@ for e in H1_elements_:
         e, k=-k_H1, xdata=H1_xdata, ydata=H1_ydata,
         phy_field="B3", eng_field="I", dtype='SEXT', color=COLOR_SEXT))
 
+# ARIS
+# BEND_FSD1_SCD1
+for e in BEND_FSD1_SCD1_elements:
+    all_rows.extend(make_rows_sf(
+        e, xdata=BEND_FSD1_SCD1_xdata, ydata=BEND_FSD1_SCD1_ydata,
+        phy_field="B", eng_field="I", dtype='BEND', color=COLOR_BEND))
 
+# BEND_FSD1_SCD2
+for e in BEND_FSD1_SCD2_elements:
+    all_rows.extend(make_rows_sf(
+        e, xdata=BEND_FSD1_SCD2_xdata, ydata=BEND_FSD1_SCD2_ydata,
+        phy_field="B", eng_field="I", dtype='BEND', color=COLOR_BEND))
+
+# QUAD_FSQ1
+for e in QUAD_FSQ1_elements:
+    all_rows.extend(make_rows_sf(
+        e, xdata=QUAD_FSQ1_xdata, ydata=QUAD_FSQ1_ydata,
+        phy_field="B2", eng_field="I", dtype='QUAD', color=COLOR_QUAD))
+
+# QUAD_FSQ2
+for e in QUAD_FSQ2_elements:
+    all_rows.extend(make_rows_sf(
+        e, xdata=QUAD_FSQ2_xdata, ydata=QUAD_FSQ2_ydata,
+        phy_field="B2", eng_field="I", dtype='QUAD', color=COLOR_QUAD))
+
+# QUAD_FSQ5
+for e in QUAD_FSQ5_elements:
+    all_rows.extend(make_rows_sf(
+        e, xdata=QUAD_FSQ5_xdata, ydata=QUAD_FSQ5_ydata,
+        phy_field="B2", eng_field="I", dtype='QUAD', color=COLOR_QUAD))
+
+# SEXT_FSQ2
+for e in SEXT_FSQ2_elements:
+    all_rows.extend(make_rows_sf(
+        e, xdata=SEXT_FSQ2_xdata, ydata=SEXT_FSQ2_ydata,
+        phy_field="B3", eng_field="I", dtype='SEXT', color=COLOR_SEXT))
+
+# SEXT_FSQ5
+for e in SEXT_FSQ5_elements:
+    all_rows.extend(make_rows_sf(
+        e, xdata=SEXT_FSQ5_xdata, ydata=SEXT_FSQ5_ydata,
+        phy_field="B3", eng_field="I", dtype='SEXT', color=COLOR_SEXT))
+
+# OCT_FSQ2
+for e in OCT_FSQ2_elements:
+    all_rows.extend(make_rows_sf(
+        e, xdata=OCT_FSQ2_xdata, ydata=OCT_FSQ2_ydata,
+        phy_field="B4", eng_field="I", dtype='OCT', color=COLOR_OCT))
+
+# OCT_FSQ5
+for e in OCT_FSQ5_elements:
+    all_rows.extend(make_rows_sf(
+        e, xdata=OCT_FSQ5_xdata, ydata=OCT_FSQ5_ydata,
+        phy_field="B4", eng_field="I", dtype='OCT', color=COLOR_OCT))
 
 ##############################################################################
 # write to xls

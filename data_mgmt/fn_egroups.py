@@ -586,3 +586,57 @@ Q5_elements_ = (
 'FS2_BBS:QV_D4004',
 'FS2_BBS:QV_D4102',
 )
+
+# ARIS
+# BEND_FSD1, SCD1
+BEND_FSD1_SCD1_elements = (
+ 'FS_F1S1:DV_D1064',
+)
+# BEND_FSD1, SCD2
+BEND_FSD1_SCD2_elements = (
+ 'FS_F1S1:DV_D1108',
+)
+
+# QUAD_FSQ1, WIQ1
+QUAD_FSQ1_elements = (
+ 'FS_F1S1:Q_D1013',
+)
+
+# QUAD_FSQ2, WIQ2,3
+QUAD_FSQ2_elements = (
+ 'FS_F1S1:Q_D1024',
+ 'FS_F1S1:Q_D1035',
+)
+
+# QUAD_FSQ5, WIQ4,5,7
+QUAD_FSQ5_elements = (
+ 'FS_F1S1:Q_D1137',
+ 'FS_F1S1:Q_D1148',
+ 'FS_F1S1:Q_D1170',
+)
+
+# SEXT_FSQ2, WIQ2,3
+SEXT_FSQ2_elements = (
+ 'FS_F1S1:S_D1024',
+ 'FS_F1S1:S_D1035',
+)
+
+# SEXT_FSQ5, WIQ4,5,7
+SEXT_FSQ5_elements = (
+ 'FS_F1S1:S_D1137',
+ 'FS_F1S1:S_D1148',
+ 'FS_F1S1:S_D1170',
+)
+
+# OCT_FSQ2, WIQ2,3
+OCT_FSQ2_elements = (
+ 'FS_F1S1:OCT_D1024',
+ 'FS_F1S1:OCT_D1035',
+)
+
+# OCT_FSQ5, WIQ4,5,7
+OCT_FSQ5_elements = (
+ 'FS_F1S1:OCT_D1137',
+ 'FS_F1S1:OCT_D1148',
+ 'FS_F1S1:OCT_D1170',
+)

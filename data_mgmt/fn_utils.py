@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from xlwt import XFStyle
+import numpy as np
 
 
 UNIT_MAP_DEFAULT = {
@@ -10,6 +11,7 @@ UNIT_MAP_DEFAULT = {
     "B": "T",
     "B2": "T/m",
     "B3": "T/m^2",
+    "B4": "T/m^3",
 }
 
 def make_fn_name(ename, phy_field, eng_field, flag_p2e):
@@ -81,3 +83,24 @@ def write_row(sheet, row_content, row=0, col0=0, style=None):
         sheet.row(row).height_mismatch = True
         sheet.row(row).height = 24 * 20
         sheet.write(row, col, label, style)
+
+
+def get_aris_data(gname, basepath="ESD/data/"):
+    # aris device only
+    """Return a tuple of x, y list joined with space
+    """
+    _map = {
+        'QUAD_FSQ1': 'FSQ1/QUAD_FSQ1',
+        'QUAD_FSQ2': 'FSQ2/QUAD_FSQ2',
+        'QUAD_FSQ5': 'FSQ5/QUAD_FSQ5',
+        'SEXT_FSQ2': 'FSQ2/SEXT_FSQ2',
+        'SEXT_FSQ5': 'FSQ5/SEXT_FSQ5',
+        'OCT_FSQ2': 'FSQ2/OCT_FSQ2',
+        'OCT_FSQ5': 'FSQ5/OCT_FSQ5',
+        'BEND_FSD1_SCD1': 'FSD1-SCD1/FSD1-SCD1',
+        'BEND_FSD1_SCD2': 'FSD1-SCD2/FSD1-SCD2',
+    }
+    fn = f"{basepath}/{_map[gname]}.csv"
+    a = np.loadtxt(fn, delimiter=',')
+    return ' '.join(str(i) for i in a[:, 0]), \
+           ' '.join(str(i) for i in a[:, 1])
