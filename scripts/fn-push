@@ -48,13 +48,15 @@ cnt = 0
 username = r_input("Enter username: ")
 password = getpass("Enter password for '{}': ".format(username))
 
-for f in data.functions:
-    r = client.create(username=username, password=password, **f)
+for t in data.functions:
+    d = t._asdict()
+    d['code'] = d.pop('code_str')
+    r = client.create(username=username, password=password, **d)
     if r.get('status') is False:
-        print("Failed to create function: {}.".format(f.get('name')))
+        print("Failed to create function: {}.".format(t.name))
     else:
         cnt += 1
-        print("Created new function: {}.".format(f.get('name')))
+        print("Created new function: {}.".format(t.name))
 
 print("-"*30)
 print("Created {} functions.".format(cnt))
