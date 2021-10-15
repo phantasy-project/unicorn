@@ -10,7 +10,7 @@ app_scripts = [i for i in glob.glob("scripts/*")]
 
 setup(
     name='python-unicorn',
-    version='0.4.3',
+    version='0.4.4',
     description='Python client interface to Unicorn service.',
     long_description=readme() + "\n\n",
     long_description_content_type='text/markdown',
